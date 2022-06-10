@@ -1,3 +1,30 @@
+# Simulation settings for using moveit_sim_controllers
+moveit_sim_hw_interface:
+  joint_model_group: arm
+  joint_model_group_pose: home
+# Settings for ros_control_boilerplate control loop
+generic_hw_control_loop:
+  loop_hz: 300
+  cycle_time_error_threshold: 0.01
+# Settings for ros_control hardware interface
+hardware_interface:
+  joints:
+    - shoulder_pan_joint
+    - shoulder_lift_joint
+    - elbow_pan_joint
+    - elbow_lift_joint
+    - wrist_pan_joint
+    - wrist_lift_joint
+    - gripper_left_joint
+    - gripper_right_joint
+  sim_control_mode: 1  # 0: position, 1: velocity
+# Publish all joint states
+# Creates the /joint_states topic necessary in ROS
+joint_state_controller:
+  type: joint_state_controller/JointStateController
+  publish_rate: 50
+controller_list:
+  []
 arm_controller:
   type: position_controllers/JointTrajectoryController
   joints:
@@ -7,50 +34,49 @@ arm_controller:
     - elbow_lift_joint
     - wrist_pan_joint
     - wrist_lift_joint
-  constraints:
-      goal_time: 0.6
-      stopped_velocity_tolerance: 0.05
-      shoulder_pan_joint: {trajectory: 10, goal: 10}
-      shoulder_lift_joint: {trajectory: 10, goal: 10}
-      elbow_pan_joint: {trajectory: 10, goal: 10}
-      elbow_lift_joint: {trajectory: 10, goal: 10}
-      wrist_pan_joint: {trajectory: 10, goal: 10}
-      wrist_lift_joint: {trajectory: 10, goal: 10}
-  stop_trajectory_duration: 0.5
-  state_publish_rate:  25
-  action_monitor_rate: 10
-
-gripper_controller:
-  type: position_controllers/JointTrajectoryController
-  joints:
-    - gripper_right_joint
-    - gripper_left_joint 
-  constraints:
-      goal_time: 0.6
-      stopped_velocity_tolerance: 0.05
-      gripper_right_joint: {trajectory: 10, goal: 10}
-      gripper_left_joint: {trajectory: 10, goal: 10}
-  stop_trajectory_duration: 0.5
-  state_publish_rate:  25
-  action_monitor_rate: 10
-
-kinect_plat_controller:
-  type: effort_controllers/JointTrajectoryController
-  joints:
-    - joint_torso_to_torso_sensor_plat
   gains:
-    joint_torso_to_torso_sensor_plat:
+    shoulder_pan_joint:
       p: 100
       d: 1
       i: 1
       i_clamp: 1
-      
-head_controller:
-  type: effort_controllers/JointTrajectoryController
+    shoulder_lift_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    elbow_pan_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    elbow_lift_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    wrist_pan_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    wrist_lift_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+gripper_controller:
+  type: position_controllers/JointTrajectoryController
   joints:
-    - joint_torso_to_head
+    - gripper_left_joint
+    - gripper_right_joint
   gains:
-    joint_torso_to_head:
+    gripper_left_joint:
+      p: 100
+      d: 1
+      i: 1
+      i_clamp: 1
+    gripper_right_joint:
       p: 100
       d: 1
       i: 1

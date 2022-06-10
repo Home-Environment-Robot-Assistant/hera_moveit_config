@@ -8,23 +8,13 @@ controller_list:
       - elbow_lift_joint
       - wrist_pan_joint
       - wrist_lift_joint
-  - name: fake_kinect_plat_controller
-    type: $(arg fake_execution_type)
-    joints:
-      - joint_torso_to_torso_sensor_plat
-  - name: fake_head_controller
-    type: $(arg fake_execution_type)
-    joints:
-      - joint_torso_to_head
   - name: fake_gripper_controller
     type: $(arg fake_execution_type)
     joints:
       - gripper_left_joint
       - gripper_right_joint
-initial:  # Define initial robot poses per group
+initial:  # Define initial robot poses.
   - group: arm
     pose: home
-  - group: kinect_plat
-    pose: front
-  - group: head
-    pose: front
+  - group: gripper
+    pose: open

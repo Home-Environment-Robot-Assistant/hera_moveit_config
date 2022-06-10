@@ -2,6 +2,7 @@
 
 distribution=${1:-noetic} 
 
+apt-get install -y ros-$distribution-moveit-ros-visualization
 apt-get install -y ros-$distribution-moveit-ros-move-group
 apt-get install -y ros-$distribution-moveit-planners-chomp
 apt-get install -y ros-$distribution-moveit-planners-ompl
