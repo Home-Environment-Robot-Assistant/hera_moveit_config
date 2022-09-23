@@ -9,6 +9,8 @@ generic_hw_control_loop:
 # Settings for ros_control hardware interface
 hardware_interface:
   joints:
+    - joint_torso_to_head
+    - joint_torso_to_torso_sensor_plat
     - shoulder_pan_joint
     - shoulder_lift_joint
     - elbow_pan_joint
